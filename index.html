@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cherry on Top | Homemade Desserts</title>
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+   <!-- =================================
+     CHERRY ON TOP LOADER
+================================= -->
+
+<div id="loader">
+
+    <div class="loader-video-container">
+
+        <video
+            id="cakeVideo"
+            class="loader-video"
+            autoplay
+            muted
+            playsinline
+            preload="auto"
+        >
+            <source
+                src="assets/cake-loader.mp4"
+                type="video/mp4"
+            >
+        </video>
+
+        <div class="loader-overlay"></div>
+
+<!-- Pixel logo animation -->
+<canvas id="logoCanvas"></canvas>
+
+<!-- Clear logo appears after pixel formation -->
+<img
+    id="finalLogo"
+    src="assets/logo.png"
+    alt="Cherry on Top"
+>
+
+<div class="loader-content">
+
+            <p class="loader-small">
+                CHERRY ON TOP
+            </p>
+
+            <p class="loader-message">
+                Baking something special...
+            </p>
+
+            <div class="loader-progress">
+                <span></span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- =================================
+         YOUR WEBSITE
+    ================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="#home" class="logo">
+                <img
+                    src="assets/logo.png"
+                    alt="Cherry on Top Logo"
+                >
+            </a>
+
+            <nav class="nav-menu">
+
+                <a href="#home" class="active">
+                    Home
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+                <a href="#menu">
+                    Menu
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+                <a href="#contact" class="order-btn">
+                    Order Now
+                </a>
+
+            </nav>
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-container">
+
+                <p class="hero-label">
+                    HOMEMADE • FRESH • DELICIOUS
+                </p>
+
+                <h1>
+                    Homemade Desserts
+                    <span>Made With Love</span>
+                </h1>
+
+                <p class="hero-description">
+                    Delicious homemade desserts and savory treats,
+                    freshly prepared with love for every special moment.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#menu"
+                        class="btn primary-btn"
+                    >
+                        Explore Menu
+                        <span>→</span>
+                    </a>
+
+                    <a
+                        href="#contact"
+                        class="btn secondary-btn"
+                    >
+                        Order Now
+                    </a>
+
+                </div>
+
+                <div class="stats">
+
+                    <div class="stat-item">
+                        <h3>50+</h3>
+                        <p>Desserts</p>
+                    </div>
+
+                    <div class="stat-item">
+                        <h3>2+</h3>
+                        <p>Years Experience</p>
+                    </div>
+
+                    <div class="stat-item">
+                        <h3>Happy</h3>
+                        <p>Customers</p>
+                    </div>
+
+                    <div class="stat-item">
+                        <h3>100%</h3>
+                        <p>Homemade</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/script.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,957 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    background: #ffffff;
+    color: #ffffff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    z-index: 1000;
+
+    background: rgba(0, 0, 0, 0.88);
+
+    backdrop-filter: blur(10px);
+}
+
+
+.nav-container {
+
+    width: 90%;
+
+    max-width: 1250px;
+
+    height: 82px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+.logo img {
+
+    width: 72px;
+
+    height: 72px;
+
+    object-fit: contain;
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.nav-menu {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 34px;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+
+.nav-menu a {
+
+    color: rgba(255, 255, 255, 0.82);
+
+    transition: 0.3s ease;
+
+    position: relative;
+}
+
+
+.nav-menu a:hover {
+
+    color: #ffffff;
+}
+
+
+/* Active Home */
+
+.nav-menu a.active {
+
+    color: #ffffff;
+}
+
+
+/* Active underline */
+
+.nav-menu a.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -8px;
+
+    width: 100%;
+
+    height: 2px;
+
+    background: #ff6b2c;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   ORDER BUTTON
+========================================= */
+
+.order-btn {
+
+    padding: 11px 22px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff7a18,
+            #ff3d3d
+        );
+
+    color: #ffffff !important;
+
+    font-weight: 700 !important;
+
+    transition: 0.3s ease;
+}
+
+
+.order-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(255, 87, 30, 0.35);
+}
+
+
+/* =========================================
+   MOBILE MENU BUTTON
+========================================= */
+
+.menu-toggle {
+
+    display: none;
+
+    background: none;
+
+    border: none;
+
+    color: white;
+
+    font-size: 28px;
+
+    cursor: pointer;
+}
+
+/* =====================================================
+   CHERRY ON TOP
+   PIXEL LOGO LOADER
+===================================================== */
+
+#loader {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    z-index: 99999;
+
+    background: #1c0904;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.9s ease,
+        visibility 0.9s ease;
+}
+
+#loader.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* VIDEO */
+
+.loader-video-container {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+.loader-video {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* DARK OVERLAY */
+
+.loader-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,0.15),
+            rgba(0,0,0,0.35)
+        );
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   CANVAS
+===================================================== */
+
+#logoCanvas {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+/* =====================================================
+   FINAL CLEAR LOGO
+===================================================== */
+
+#finalLogo {
+    position: absolute;
+
+    z-index: 6;
+
+    width: min(42vw, 430px);
+    height: auto;
+
+    left: 50%;
+    top: 48%;
+
+    transform: translate(-50%, -50%) scale(0.92);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* Logo becomes sharp after pixel formation */
+
+#finalLogo.show {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    #finalLogo {
+        width: 65vw;
+        top: 48%;
+    }
+
+}
+/* =====================================================
+   TEXT
+===================================================== */
+
+.loader-content {
+    position: absolute;
+
+    z-index: 10;
+
+    left: 50%;
+    bottom: 65px;
+
+    transform: translateX(-50%);
+
+    width: 90%;
+
+    text-align: center;
+
+    color: white;
+}
+
+.loader-small {
+    margin: 0 0 9px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 5px;
+
+    color: #f6dfc1;
+}
+
+.loader-message {
+    margin: 0;
+
+    font-size: 14px;
+
+    color: rgba(255,255,255,0.85);
+}
+
+
+/* PROGRESS */
+
+.loader-progress {
+    width: 180px;
+
+    height: 2px;
+
+    margin: 18px auto 0;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.25);
+}
+
+.loader-progress span {
+    display: block;
+
+    width: 0%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff9a3c,
+            #ff3d3d
+        );
+
+    animation:
+        loaderProgress 5s linear forwards;
+}
+
+@keyframes loaderProgress {
+
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .loader-content {
+        bottom: 40px;
+    }
+
+    .loader-small {
+        font-size: 9px;
+        letter-spacing: 3px;
+    }
+
+    .loader-message {
+        font-size: 12px;
+    }
+
+    .loader-progress {
+        width: 140px;
+    }
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background-image:
+        url("../assets/hero.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   HERO OVERLAY
+========================================= */
+
+.hero-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.88) 0%,
+            rgba(0, 0, 0, 0.65) 45%,
+            rgba(0, 0, 0, 0.42) 100%
+        );
+}
+
+
+/* =========================================
+   HERO CONTAINER
+========================================= */
+
+.hero-container {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 90%;
+
+    max-width: 1250px;
+
+    margin: auto;
+
+    padding-top: 100px;
+}
+
+
+/* =========================================
+   HERO LABEL
+========================================= */
+
+.hero-label {
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    font-weight: 700;
+
+    color: #f5dfc1;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================
+   HERO HEADING
+========================================= */
+
+.hero h1 {
+
+    max-width: 850px;
+
+    font-size: clamp(
+        48px,
+        7vw,
+        88px
+    );
+
+    line-height: 1.02;
+
+    letter-spacing: -3px;
+
+    font-weight: 800;
+
+    color: #ffffff;
+}
+
+
+.hero h1 span {
+
+    display: block;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #ff9a3c,
+            #ff4b3e
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+/* =========================================
+   HERO DESCRIPTION
+========================================= */
+
+.hero-description {
+
+    max-width: 580px;
+
+    margin-top: 28px;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   HERO BUTTONS
+========================================= */
+
+.hero-buttons {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-top: 35px;
+}
+
+
+.btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 14px 25px;
+
+    border-radius: 30px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition: 0.3s ease;
+}
+
+
+/* Primary */
+
+.primary-btn {
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #ff7a18,
+            #ff3d3d
+        );
+
+    color: white;
+
+    box-shadow:
+        0 10px 25px rgba(255, 76, 30, 0.25);
+}
+
+
+.primary-btn span {
+
+    font-size: 18px;
+
+    transition: 0.3s ease;
+}
+
+
+.primary-btn:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(255, 76, 30, 0.35);
+}
+
+
+.primary-btn:hover span {
+
+    transform: translateX(5px);
+}
+
+
+/* Secondary */
+
+.secondary-btn {
+
+    border: 1px solid rgba(255, 255, 255, 0.45);
+
+    color: white;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(5px);
+}
+
+
+.secondary-btn:hover {
+
+    background: white;
+
+    color: #241109;
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+.stats {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 65px;
+
+    margin-top: 65px;
+
+    padding-bottom: 40px;
+}
+
+
+.stat-item {
+
+    position: relative;
+}
+
+
+.stat-item:not(:last-child)::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 5px;
+
+    right: -33px;
+
+    width: 1px;
+
+    height: 40px;
+
+    background: rgba(255, 255, 255, 0.25);
+}
+
+
+.stat-item h3 {
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    color: #ff8b3d;
+
+    line-height: 1.2;
+}
+
+
+.stat-item p {
+
+    margin-top: 4px;
+
+    font-size: 12px;
+
+    color: rgba(255, 255, 255, 0.62);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .nav-menu {
+
+        display: none;
+
+        position: absolute;
+
+        top: 82px;
+
+        left: 0;
+
+        width: 100%;
+
+        padding: 25px;
+
+        background: rgba(0, 0, 0, 0.97);
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 22px;
+    }
+
+
+    .nav-menu.active {
+
+        display: flex;
+    }
+
+
+    .menu-toggle {
+
+        display: block;
+    }
+
+
+    .hero-container {
+
+        padding-top: 130px;
+
+        padding-bottom: 60px;
+    }
+
+
+    .hero h1 {
+
+        font-size: clamp(
+            45px,
+            10vw,
+            70px
+        );
+    }
+
+
+    .stats {
+
+        gap: 35px;
+
+        flex-wrap: wrap;
+    }
+
+
+    .stat-item:not(:last-child)::after {
+
+        display: none;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .nav-container {
+
+        height: 70px;
+    }
+
+
+    .logo img {
+
+        width: 60px;
+
+        height: 60px;
+    }
+
+
+    .hero {
+
+        min-height: 100vh;
+
+        background-position: center;
+    }
+
+
+    .hero-overlay {
+
+        background:
+            linear-gradient(
+                90deg,
+                rgba(0, 0, 0, 0.9),
+                rgba(0, 0, 0, 0.65)
+            );
+    }
+
+
+    .hero-container {
+
+        width: 88%;
+
+        padding-top: 100px;
+    }
+
+
+    .hero-label {
+
+        font-size: 10px;
+
+        letter-spacing: 2.5px;
+    }
+
+
+    .hero h1 {
+
+        font-size: 46px;
+
+        letter-spacing: -2px;
+    }
+
+
+    .hero-description {
+
+        font-size: 14px;
+
+        margin-top: 22px;
+    }
+
+
+    .hero-buttons {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        width: 100%;
+    }
+
+
+    .btn {
+
+        width: 100%;
+    }
+
+
+    .stats {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 25px;
+
+        margin-top: 50px;
+    }
+
+
+    .stat-item h3 {
+
+        font-size: 22px;
+    }
+}
