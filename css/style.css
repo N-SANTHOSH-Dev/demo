@@ -481,7 +481,7 @@ button {
 
     background-size: cover;
 
-    background-position: center;
+   background-position: 65% center;
 
     background-repeat: no-repeat;
 
@@ -775,6 +775,191 @@ button {
     color: rgba(255, 255, 255, 0.62);
 }
 
+
+/* =========================================
+   CENTERED CUSTOM ORDER HIGHLIGHT
+========================================= */
+
+.home-highlights {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 30px;
+    padding: 0 0 35px;
+
+    animation: highlightReveal 0.9s ease-out both;
+    animation-delay: 0.5s;
+}
+
+.highlight-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    width: fit-content;
+    max-width: 100%;
+    padding: 18px 28px;
+
+    background: rgba(30, 14, 7, 0.88);
+    border: 1px solid rgba(255, 154, 60, 0.75);
+    border-radius: 16px;
+
+    box-shadow:
+        0 0 20px rgba(255, 122, 24, 0.18),
+        inset 0 0 18px rgba(255, 154, 60, 0.06);
+
+    text-align: left;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+
+    animation: cardGlow 3s ease-in-out 1.5s infinite;
+}
+
+.highlight-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #ff9a3c;
+
+    box-shadow:
+        0 0 30px rgba(255, 122, 24, 0.3),
+        0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.highlight-icon {
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #2b1209;
+    background: linear-gradient(135deg, #ffd08a, #ff8b3d);
+
+    font-size: 24px;
+    font-weight: 800;
+
+    box-shadow: 0 0 18px rgba(255, 139, 61, 0.25);
+
+    animation: iconPulse 2.5s ease-in-out infinite;
+}
+
+.highlight-content {
+    min-width: 0;
+}
+
+.highlight-content h4 {
+    margin: 0;
+
+    color: #ffad58;
+
+    font-size: 17px;
+    line-height: 1.4;
+    font-weight: 800;
+}
+
+.highlight-content p {
+    margin: 5px 0 0;
+
+    color: #ffffff;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Entrance animation */
+
+@keyframes highlightReveal {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Subtle card glow */
+
+@keyframes cardGlow {
+    0%, 100% {
+        box-shadow:
+            0 0 16px rgba(255, 122, 24, 0.12),
+            inset 0 0 18px rgba(255, 154, 60, 0.04);
+    }
+
+    50% {
+        box-shadow:
+            0 0 26px rgba(255, 122, 24, 0.28),
+            inset 0 0 18px rgba(255, 154, 60, 0.08);
+    }
+}
+
+/* Icon pulse */
+
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .home-highlights {
+        margin-top: 28px;
+        padding: 0 0 25px;
+    }
+
+    .highlight-card {
+        width: 100%;
+        max-width: 420px;
+
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .highlight-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 21px;
+    }
+
+    .highlight-content h4 {
+        font-size: 14px;
+    }
+
+    .highlight-content p {
+        font-size: 11px;
+    }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+    .home-highlights,
+    .highlight-card,
+    .highlight-icon {
+        animation: none;
+    }
+}
 
 /* =========================================
    RESPONSIVE
