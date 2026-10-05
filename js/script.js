@@ -491,3 +491,483 @@ window.addEventListener("load", () => {
     }, 5000);
 
 });
+
+/* =========================================================
+   ABOUT CARD DECK
+   Cherry on Top
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const aboutCards = Array.from(
+        document.querySelectorAll(".about-card")
+    );
+
+    const aboutDots = Array.from(
+        document.querySelectorAll(".about-dot")
+    );
+
+    /*
+       Stop if About section does not exist.
+       This also prevents errors from affecting
+       the rest of the website.
+    */
+    if (aboutCards.length === 0) {
+        return;
+    }
+
+
+    /* =====================================================
+       SETTINGS
+    ===================================================== */
+
+    let aboutIndex = 0;
+
+    let aboutTimer = null;
+
+    const ABOUT_DURATION = 7000;
+
+
+    /* =====================================================
+       UPDATE CARD POSITIONS
+    ===================================================== */
+
+    function updateAboutStack() {
+
+        const total = aboutCards.length;
+
+
+        aboutCards.forEach(function (card, index) {
+
+            /*
+               Remove previous position classes
+            */
+
+            card.classList.remove(
+                "card-front",
+                "card-left",
+                "card-right",
+                "card-hidden",
+                "card-moving-left",
+                "card-moving-right"
+            );
+
+
+            /*
+               Calculate position
+            */
+
+            const position =
+                (index - aboutIndex + total) % total;
+
+
+            /* ---------------------------------------------
+               CURRENT CARD
+            --------------------------------------------- */
+
+            if (position === 0) {
+
+                card.classList.add(
+                    "card-front"
+                );
+
+            }
+
+
+            /* ---------------------------------------------
+               NEXT CARD - RIGHT
+            --------------------------------------------- */
+
+            else if (position === 1) {
+
+                card.classList.add(
+                    "card-right"
+                );
+
+            }
+
+
+            /* ---------------------------------------------
+               PREVIOUS CARD - LEFT
+            --------------------------------------------- */
+
+            else if (position === total - 1) {
+
+                card.classList.add(
+                    "card-left"
+                );
+
+            }
+
+
+            /* ---------------------------------------------
+               OTHER CARD
+            --------------------------------------------- */
+
+            else {
+
+                card.classList.add(
+                    "card-hidden"
+                );
+
+            }
+
+        });
+
+
+        /* =================================================
+           UPDATE DOTS
+        ================================================= */
+
+        aboutDots.forEach(function (dot, index) {
+
+            dot.classList.toggle(
+                "active",
+                index === aboutIndex
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       NEXT CARD
+    ===================================================== */
+
+    function nextAboutCard() {
+
+        aboutIndex =
+            (aboutIndex + 1) %
+            aboutCards.length;
+
+
+        updateAboutStack();
+
+
+        restartAboutLoop();
+
+    }
+
+
+    /* =====================================================
+       PREVIOUS CARD
+    ===================================================== */
+
+    function previousAboutCard() {
+
+        aboutIndex =
+            (aboutIndex - 1 + aboutCards.length) %
+            aboutCards.length;
+
+
+        updateAboutStack();
+
+
+        restartAboutLoop();
+
+    }
+
+
+    /* =====================================================
+       RESTART AUTO LOOP
+    ===================================================== */
+
+    function restartAboutLoop() {
+
+        /*
+           Clear old timer
+        */
+
+        if (aboutTimer !== null) {
+
+            clearTimeout(aboutTimer);
+
+        }
+
+
+        /*
+           Start new timer
+        */
+
+        aboutTimer = setTimeout(
+            function () {
+
+                nextAboutCard();
+
+            },
+            ABOUT_DURATION
+        );
+
+    }
+
+
+    /* =====================================================
+       CLICK CARD
+    ===================================================== */
+
+    aboutCards.forEach(
+        function (card, index) {
+
+            card.addEventListener(
+                "click",
+                function () {
+
+                    /*
+                       If this is already the current card,
+                       do nothing.
+                    */
+
+                    if (index === aboutIndex) {
+
+                        restartAboutLoop();
+
+                        return;
+
+                    }
+
+
+                    /*
+                       Move clicked card to center
+                    */
+
+                    aboutIndex = index;
+
+
+                    updateAboutStack();
+
+
+                    restartAboutLoop();
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       DOT CLICK
+    ===================================================== */
+
+    aboutDots.forEach(
+        function (dot, index) {
+
+            dot.addEventListener(
+                "click",
+                function (event) {
+
+                    /*
+                       Prevent event bubbling
+                    */
+
+                    event.stopPropagation();
+
+
+                    /*
+                       Move selected card to center
+                    */
+
+                    aboutIndex = index;
+
+
+                    updateAboutStack();
+
+
+                    restartAboutLoop();
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       TOUCH SWIPE
+       Optional mobile interaction
+    ===================================================== */
+
+    let touchStartX = 0;
+
+    let touchEndX = 0;
+
+
+    aboutCards.forEach(
+        function (card) {
+
+            card.addEventListener(
+                "touchstart",
+                function (event) {
+
+                    touchStartX =
+                        event.changedTouches[0].screenX;
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+            card.addEventListener(
+                "touchend",
+                function (event) {
+
+                    touchEndX =
+                        event.changedTouches[0].screenX;
+
+
+                    handleAboutSwipe();
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+        }
+    );
+
+
+    function handleAboutSwipe() {
+
+        const difference =
+            touchEndX - touchStartX;
+
+
+        /*
+           Swipe threshold
+        */
+
+        if (Math.abs(difference) < 50) {
+
+            return;
+
+        }
+
+
+        /*
+           Swipe left
+           -> next card
+        */
+
+        if (difference < 0) {
+
+            nextAboutCard();
+
+        }
+
+
+        /*
+           Swipe right
+           -> previous card
+        */
+
+        else {
+
+            previousAboutCard();
+
+        }
+
+    }
+
+
+    /* =====================================================
+       INITIALIZE
+    ===================================================== */
+
+    updateAboutStack();
+
+    restartAboutLoop();
+
+});
+
+/* =========================================================
+   NAVBAR ACTIVE SECTION
+   SAFE VERSION
+========================================================= */
+
+(function () {
+
+    const navLinks = document.querySelectorAll(
+        ".nav-menu .nav-link"
+    );
+
+    if (!navLinks.length) {
+        return;
+    }
+
+    const sectionIds = [
+        "home",
+        "about",
+        "menu",
+        "contact"
+    ];
+
+    const sections = sectionIds
+        .map(function (id) {
+            return document.getElementById(id);
+        })
+        .filter(function (section) {
+            return section !== null;
+        });
+
+
+    function setActiveSection(id) {
+
+        navLinks.forEach(function (link) {
+
+            const linkTarget =
+                link.getAttribute("href");
+
+            if (linkTarget === "#" + id) {
+                link.classList.add("active");
+            } else {
+                link.classList.remove("active");
+            }
+
+        });
+
+    }
+
+
+    function checkActiveSection() {
+
+        let currentSection = "home";
+
+        const scrollPosition =
+            window.scrollY + 250;
+
+
+        sections.forEach(function (section) {
+
+            if (
+                scrollPosition >=
+                section.offsetTop
+            ) {
+
+                currentSection =
+                    section.id;
+
+            }
+
+        });
+
+
+        setActiveSection(currentSection);
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        checkActiveSection,
+        {
+            passive: true
+        }
+    );
+
+
+    checkActiveSection();
+
+})();
